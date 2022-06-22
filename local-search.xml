@@ -4,6 +4,29 @@
   
   
   <entry>
+    <title>Git-pull</title>
+    <link href="/2022/06/22/Git-pull/"/>
+    <url>/2022/06/22/Git-pull/</url>
+    
+    <content type="html"><![CDATA[<ul><li>git pull 的作用是什么？</li><li>Failed to connect to github.com port 443 after 21067 ms: med out<ul><li>产生该问题的原因是什么？<ul><li>本地的VPN导致git proxy出现问题。具体什么问题目前还不清楚，见以后吧。</li></ul></li><li>如何解决该问题？<ul><li><code>git config --global --unset http.proxy</code></li></ul></li></ul></li><li>fatal: refusing to merge unrelated histories<ul><li>产生该问题的原因是什么？<ul><li>可能会在git pull或者git push中都有可能会遇到，这是因为两个分支没有取得关系。</li></ul></li><li>如何解决该问题？<ul><li><code>git pull origin master --allow-unrelated-histories</code></li><li>–allow-unrelated-histories:允许不相关的历史。</li></ul></li></ul></li></ul>]]></content>
+    
+    
+    <categories>
+      
+      <category>Work</category>
+      
+      <category>Useful Commands</category>
+      
+      <category>Git</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>JavaScript DOM 编程艺术（第2版）</title>
     <link href="/2022/06/22/JavaScript%20DOM%E7%BC%96%E7%A8%8B%E8%89%BA%E6%9C%AF%EF%BC%88%E7%AC%AC2%E7%89%88%EF%BC%89/"/>
     <url>/2022/06/22/JavaScript%20DOM%E7%BC%96%E7%A8%8B%E8%89%BA%E6%9C%AF%EF%BC%88%E7%AC%AC2%E7%89%88%EF%BC%89/</url>
@@ -100,6 +123,8 @@
       <category>Work</category>
       
       <category>Useful Commands</category>
+      
+      <category>Git</category>
       
     </categories>
     
