@@ -4,18 +4,39 @@
   
   
   <entry>
-    <title>常用链接</title>
-    <link href="/2022/06/22/%E5%B8%B8%E7%94%A8%E9%93%BE%E6%8E%A5/"/>
-    <url>/2022/06/22/%E5%B8%B8%E7%94%A8%E9%93%BE%E6%8E%A5/</url>
+    <title>乐观向上</title>
+    <link href="/2022/06/22/%E4%B9%90%E8%A7%82%E5%90%91%E4%B8%8A/"/>
+    <url>/2022/06/22/%E4%B9%90%E8%A7%82%E5%90%91%E4%B8%8A/</url>
     
     <content type="html"><![CDATA[]]></content>
     
     
     <categories>
       
+      <category>Life</category>
+      
+      <category>Positive Energy Motto</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>常用链接</title>
+    <link href="/2022/06/22/%E5%B8%B8%E7%94%A8%E9%93%BE%E6%8E%A5/"/>
+    <url>/2022/06/22/%E5%B8%B8%E7%94%A8%E9%93%BE%E6%8E%A5/</url>
+    
+    <content type="html"><![CDATA[<blockquote><p>此文章用来记录学习和工作中遇到的值得收藏的链接。可用作字典，有机会多多回顾，避免收藏夹吃灰。</p></blockquote><ul><li>【Hexo Fluid用户手册】 <a href="https://hexo.fluid-dev.com/docs/guide/">https://hexo.fluid-dev.com/docs/guide/</a></li><li>【在线Markdown编辑器示例】 <a href="https://markdown.com.cn/editor/">https://markdown.com.cn/editor/</a></li></ul>]]></content>
+    
+    
+    <categories>
+      
       <category>Work</category>
       
-      <category>Useful Link</category>
+      <category>Useful Commands</category>
       
     </categories>
     
@@ -56,6 +77,8 @@
     <categories>
       
       <category>Work</category>
+      
+      <category>Useful Commands</category>
       
     </categories>
     
