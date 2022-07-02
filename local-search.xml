@@ -27,11 +27,11 @@
   
   
   <entry>
-    <title>第一章</title>
+    <title>第一章 什么是JavaScript</title>
     <link href="/2022/07/01/%E7%AC%AC%E4%B8%80%E7%AB%A0/"/>
     <url>/2022/07/01/%E7%AC%AC%E4%B8%80%E7%AB%A0/</url>
     
-    <content type="html"><![CDATA[]]></content>
+    <content type="html"><![CDATA[<h2 id="笔记"><a href="#笔记" class="headerlink" title="笔记"></a>笔记</h2><h3 id="1-1"><a href="#1-1" class="headerlink" title="1.1"></a>1.1</h3><ol><li>网景 Mocha——&gt;LiveScript——&gt;JavaScript</li></ol><h3 id="1-2"><a href="#1-2" class="headerlink" title="1.2"></a>1.2</h3><p>Javascript:</p><ol><li><p>ECMAScript(核心)</p><ol><li>宿主环境：Web浏览器、Node.js、Adobe Flash</li><li>版本：2019年第十版</li></ol></li><li><p>DOM（文档对象模型）</p><ol><li>应用编程接口，用于HTML中使用扩展XML</li><li>保持Web跨平台特性</li><li>DOM Core、 DOM HTML</li><li>DOM Level1、DOM Level2、DOM Level3</li></ol></li><li><p>BOM（浏览器对象模型）</p><ol><li>操控浏览器显示页面以外的部分</li><li>主要针对浏览器窗口及其子窗口</li></ol></li></ol>]]></content>
     
     
     <categories>
