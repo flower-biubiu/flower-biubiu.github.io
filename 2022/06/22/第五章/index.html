@@ -24,7 +24,7 @@
 <meta property="og:description" content="笔记5.15.2 平稳退化所谓的平稳退化就是虽然某些功能无法使用，但基本的操作仍能完成。  window.open()方法 这是BOM的一个典型的方法。作用是打开一个浏览器窗口。 问：浏览器的组成部分是什么？ DOM是文档内容相关，BOM是浏览器相关的，BOM的相关方法不会直接影响文档内容。 open方法有三个参数，url、name、feature三者都可省略。 url的作用是在新打开的窗口中打开">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-06-22T11:48:54.000Z">
-<meta property="article:modified_time" content="2022-07-01T14:42:46.633Z">
+<meta property="article:modified_time" content="2022-07-05T13:48:23.512Z">
 <meta property="article:author" content="Ciel Liu">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -235,7 +235,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.4k words
+          2.5k words
         
       </span>
     
@@ -316,7 +316,7 @@
 <p>针对浏览Web时同时禁用图像和JavaScript的类似于搜索机器人的用户，如果不能平稳退化，大大影响了网站的推销速度。</p>
 <p><code>&lt;a href=&quot;链接&quot; onclick=&quot;popUp(&#39;链接&#39;);return false&quot;&gt;&lt;/a&gt;</code></p>
 <p><code>&lt;a href=&quot;链接&quot; onclick=&quot;popUp(this.href);return false&quot;&gt;&lt;/a&gt;</code></p>
-<p><code>注：this.href是DOM方法，JS代码全部放到外部文件里更好。</code></p>
+<p><code>注：this.href是DOM方法，JS代码全部放到外部文件里更好。</code><br><code>问：为什么return false href不起作用</code></p>
 <h3 id="5-3-向CSS学习"><a href="#5-3-向CSS学习" class="headerlink" title="5.3 向CSS学习"></a>5.3 向CSS学习</h3><ol>
 <li>Web文档的内容结构（标记）和版面设计（样式）分离。</li>
 <li>真正能从CSS技术获益的方法是把样式全部转移到外部文件中去。</li>
