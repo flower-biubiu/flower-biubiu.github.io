@@ -24,7 +24,7 @@
 <meta property="og:description" content="问： 现在不同浏览器的最新版本 笔记2.1 &lt;script&gt;标签 目的：将JS插入到HTML中。  属性：   async: 只对外部文件有效，立即下载脚本，但不阻止其他页面动作。  charset: 很少使用，说明src指代的目标文件的字符编码，charset需要和src搭配使用。  crossorigin：将请求模式设置为http CORS(跨域资源共享)，默认不使用CORS。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-07-25T22:16:15.000Z">
-<meta property="article:modified_time" content="2022-07-26T23:31:53.674Z">
+<meta property="article:modified_time" content="2022-07-26T23:57:19.924Z">
 <meta property="article:author" content="Ciel Liu">
 <meta name="twitter:card" content="summary_large_image">
   
@@ -235,7 +235,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.4k words
+          1.6k words
         
       </span>
     
@@ -246,7 +246,7 @@
         
         
         
-          12 mins
+          14 mins
         
       </span>
     
@@ -371,12 +371,35 @@
 <li>XHTML中使用js必须设置”type&#x3D;text&#x2F;javascript”。</li>
 <li>&lt; ——&gt; &amp;lt</li>
 <li><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs xml">//&lt;![CDATA[<br><br>        *任意文本，不作为标签来解析*<br>        <br>//]]&gt;<br><br></code></pre></td></tr></table></figure></li>
+<li></li>
 </ul>
 </li>
 </ol>
-<h3 id="2-2-行内代码与外部文件"><a href="#2-2-行内代码与外部文件" class="headerlink" title="2.2 行内代码与外部文件"></a>2.2 行内代码与外部文件</h3><pre><code class="hljs">- 
-</code></pre>
-<h3 id="2-3-文档模式"><a href="#2-3-文档模式" class="headerlink" title="2.3 文档模式"></a>2.3 文档模式</h3><h3 id="2-4-lt-noscript-gt-元素"><a href="#2-4-lt-noscript-gt-元素" class="headerlink" title="2.4 &lt;noscript&gt;元素"></a>2.4 &lt;noscript&gt;元素</h3>
+<h3 id="2-2-行内代码与外部文件"><a href="#2-2-行内代码与外部文件" class="headerlink" title="2.2 行内代码与外部文件"></a>2.2 行内代码与外部文件</h3><ul>
+<li><p>最佳实践：外部文件</p>
+<ul>
+<li>可维护性，一处更新，多处使用。</li>
+<li>缓存：浏览器会根据特定的设置缓存所有外部链接的js文件。更快。</li>
+<li>适应未来，良好的兼容了HTML和XHTML。<br>  <code>注： SPDY/HTTP2 预请求的消耗已经显著降低？咋么降低的？</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="2-3-文档模式"><a href="#2-3-文档模式" class="headerlink" title="2.3 文档模式"></a>2.3 文档模式</h3><ul>
+<li>文档模式一般分为混杂模式和标准模式。通过doctype可以切换。<ul>
+<li>据说浏览器一致性目前是不存在的，要使用黑科技。</li>
+<li>混杂模式省略doctype声明作为开关。</li>
+<li>标准模式有特定的文档类型声明，具体现查吧。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-4-lt-noscript-gt-元素"><a href="#2-4-lt-noscript-gt-元素" class="headerlink" title="2.4 &lt;noscript&gt;元素"></a>2.4 &lt;noscript&gt;元素</h3><ul>
+<li>用于给不支持js的浏览器提供替换内容。<ul>
+<li>浏览器不支持脚本。</li>
+<li>浏览器对脚本的支持关闭。</li>
+</ul>
+</li>
+</ul>
+
                 
               </div>
             
