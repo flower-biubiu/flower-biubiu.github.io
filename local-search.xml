@@ -4,6 +4,29 @@
   
   
   <entry>
+    <title>第二章</title>
+    <link href="/2022/07/26/%E7%AC%AC%E4%BA%8C%E7%AB%A0/"/>
+    <url>/2022/07/26/%E7%AC%AC%E4%BA%8C%E7%AB%A0/</url>
+    
+    <content type="html"><![CDATA[<p><code>问： 现在不同浏览器的最新版本</code></p><h2 id="笔记"><a href="#笔记" class="headerlink" title="笔记"></a>笔记</h2><h3 id="2-1-标签"><a href="#2-1-标签" class="headerlink" title="2.1 标签"></a>2.1 <script>标签</h3><ol><li><p>目的：将JS插入到HTML中。</p></li><li><p>属性： </p></li><li><p>标签位置：</p></li><li></li></ol><h3 id="2-2-行内代码与外部文件"><a href="#2-2-行内代码与外部文件" class="headerlink" title="2.2 行内代码与外部文件"></a>2.2 行内代码与外部文件</h3><h3 id="2-3-文档模式"><a href="#2-3-文档模式" class="headerlink" title="2.3 文档模式"></a>2.3 文档模式</h3><h3 id="2-4-元素"><a href="#2-4-元素" class="headerlink" title="2.4 元素"></a>2.4 <noscript>元素</h3>]]></content>
+    
+    
+    <categories>
+      
+      <category>Book</category>
+      
+      <category>Technology</category>
+      
+      <category>JavaScript 高级程序设计（第4版）</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>认知驱动</title>
     <link href="/2022/07/26/%E8%AE%A4%E7%9F%A5%E9%A9%B1%E5%8A%A8/"/>
     <url>/2022/07/26/%E8%AE%A4%E7%9F%A5%E9%A9%B1%E5%8A%A8/</url>
@@ -31,7 +54,7 @@
     <link href="/2022/07/26/%E8%AE%A4%E7%9F%A5%E8%A7%89%E9%86%92/"/>
     <url>/2022/07/26/%E8%AE%A4%E7%9F%A5%E8%A7%89%E9%86%92/</url>
     
-    <content type="html"><![CDATA[<hr>]]></content>
+    <content type="html"><![CDATA[]]></content>
     
     
     <categories>
@@ -54,7 +77,7 @@
     <link href="/2022/07/01/%E7%AC%AC%E5%85%AD%E7%AB%A0/"/>
     <url>/2022/07/01/%E7%AC%AC%E5%85%AD%E7%AB%A0/</url>
     
-    <content type="html"><![CDATA[]]></content>
+    <content type="html"><![CDATA[<p><code>问：a标签、img标签的属性是什么</code></p><p><code>问：试一试例子</code></p>]]></content>
     
     
     <categories>
