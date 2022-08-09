@@ -16,21 +16,21 @@
   <meta name="author" content="Ciel Liu">
   <meta name="keywords" content="">
   
-    <meta name="description" content="问： 现在不同浏览器的最新版本 笔记2.1 &lt;script&gt;标签 目的：将JS插入到HTML中。  属性：   async: 只对外部文件有效，立即下载脚本，但不阻止其他页面动作。  charset: 很少使用，说明src指代的目标文件的字符编码，charset需要和src搭配使用。  crossorigin：将请求模式设置为http CORS(跨域资源共享)，默认不使用CORS。">
+    <meta name="description" content="笔记3.1 语法 区分大小写。  标识符开头字母、下划线、$;其他字母、数字、下划线、$。常用“驼峰式”书写。  注释   123单行注释： &#x2F;&#x2F;多行注释： &#x2F;* *&#x2F; ECMAScript 5增加了”严格模式”的概念，是一种不同的JavaScript解析和执行模型。   1use strict   上述是一个预处理指令，使用这种方法可以不破坏ECMAScript语法。   可以单独指定一个函数在">
 <meta property="og:type" content="article">
-<meta property="og:title" content="第二章 HTML中的JavaScript">
-<meta property="og:url" content="https://flower-biubiu.github.io/2022/07/26/%E7%AC%AC%E4%BA%8C%E7%AB%A0/index.html">
+<meta property="og:title" content="第三章 语言基础">
+<meta property="og:url" content="https://flower-biubiu.github.io/2022/07/26/%E7%AC%AC%E4%B8%89%E7%AB%A0/index.html">
 <meta property="og:site_name" content="小刘的博客">
-<meta property="og:description" content="问： 现在不同浏览器的最新版本 笔记2.1 &lt;script&gt;标签 目的：将JS插入到HTML中。  属性：   async: 只对外部文件有效，立即下载脚本，但不阻止其他页面动作。  charset: 很少使用，说明src指代的目标文件的字符编码，charset需要和src搭配使用。  crossorigin：将请求模式设置为http CORS(跨域资源共享)，默认不使用CORS。">
+<meta property="og:description" content="笔记3.1 语法 区分大小写。  标识符开头字母、下划线、$;其他字母、数字、下划线、$。常用“驼峰式”书写。  注释   123单行注释： &#x2F;&#x2F;多行注释： &#x2F;* *&#x2F; ECMAScript 5增加了”严格模式”的概念，是一种不同的JavaScript解析和执行模型。   1use strict   上述是一个预处理指令，使用这种方法可以不破坏ECMAScript语法。   可以单独指定一个函数在">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-07-25T22:16:15.000Z">
-<meta property="article:modified_time" content="2022-07-26T23:57:19.924Z">
+<meta property="article:modified_time" content="2022-08-09T22:58:20.340Z">
 <meta property="article:author" content="Ciel Liu">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>第二章 HTML中的JavaScript - 小刘的博客</title>
+  <title>第三章 语言基础 - 小刘的博客</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -212,7 +212,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="第二章 HTML中的JavaScript"></span>
+            <span id="subtitle" data-typed-text="第三章 语言基础"></span>
           
         </div>
 
@@ -235,7 +235,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.6k words
+          4.2k words
         
       </span>
     
@@ -246,7 +246,7 @@
         
         
         
-          14 mins
+          35 mins
         
       </span>
     
@@ -292,114 +292,351 @@
         <div id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">第二章 HTML中的JavaScript</h1>
+            <h1 style="display: none">第三章 语言基础</h1>
             
             
               <div class="markdown-body">
                 
-                <p><code>问： 现在不同浏览器的最新版本</code></p>
-<h2 id="笔记"><a href="#笔记" class="headerlink" title="笔记"></a>笔记</h2><h3 id="2-1-lt-script-gt-标签"><a href="#2-1-lt-script-gt-标签" class="headerlink" title="2.1 &lt;script&gt;标签"></a>2.1 &lt;script&gt;标签</h3><ol>
-<li><p>目的：将JS插入到HTML中。</p>
+                <h2 id="笔记"><a href="#笔记" class="headerlink" title="笔记"></a>笔记</h2><h3 id="3-1-语法"><a href="#3-1-语法" class="headerlink" title="3.1 语法"></a>3.1 语法</h3><ul>
+<li><p>区分大小写。</p>
 </li>
-<li><p>属性： </p>
-<ul>
-<li><p>async: 只对外部文件有效，立即下载脚本，但不阻止其他页面动作。</p>
+<li><p>标识符开头字母、下划线、$;其他字母、数字、下划线、$。常用“驼峰式”书写。</p>
 </li>
-<li><p>charset: 很少使用，说明src指代的目标文件的字符编码，charset需要和src搭配使用。</p>
+<li><p>注释</p>
+  <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs awk">单行注释： <span class="hljs-regexp">//</span><br>多行注释： <span class="hljs-regexp">/* */</span><br><br></code></pre></td></tr></table></figure></li>
+<li><p>ECMAScript 5增加了”严格模式”的概念，是一种不同的JavaScript解析和执行模型。</p>
+  <figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs actionscript"><span class="hljs-keyword">use</span> strict<br></code></pre></td></tr></table></figure>
+<p>  上述是一个预处理指令，使用这种方法可以不破坏ECMAScript语法。</p>
+<p>  可以单独指定一个函数在严格模式下执行。</p>
+  <figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs reasonml"><span class="hljs-keyword">function</span> <span class="hljs-keyword">do</span><span class="hljs-constructor">Something()</span> &#123;<br>    <span class="hljs-string">&quot;use strict&quot;</span><br><br>    <span class="hljs-comment">// 函数体</span><br>&#125;<br></code></pre></td></tr></table></figure></li>
+<li><p>语句末尾加上分号有助于提高性能，约定俗称加上分号。（虽然解释器可以自行确定语句在哪停止，可以去查查为什么）</p>
 </li>
-<li><p>crossorigin：将请求模式设置为http CORS(跨域资源共享)，默认不使用CORS。</p>
-<ul>
-<li>anonymous: 执行跨域请求，不发送凭据。</li>
-<li>use-credentials: 执行跨域请求，发送凭据（cookie，证书，http基本身份验证）</li>
-</ul>
-</li>
-</ul>
-<p> <code>问：什么是跨域？</code></p>
-<p> <code>答：网页需要请求其他服务器的资源的请求状态</code></p>
-<ul>
-<li>defer: 只对外部文件有效。可以用来延迟脚本执行（直到页面文档完全解析和显示以后）。立即下载，延迟执行。</li>
-<li>integrity: 属性值指定加密签名，允许比对接受到的资源签名和该属性值是否一致。</li>
-<li>language: 废弃。以前用来指定代码语言版本。</li>
-<li>src: 表示要执行的外部文件。</li>
-<li>type: 惯例：text&#x2F;javascript、application&#x2F;x-javascript、module(ES6模块)。</li>
-</ul>
-</li>
-<li><p>使用方式:</p>
-<ul>
-<li><p>行内js:直接把代码放到元素中。</p>
-</li>
-<li><p>外部js文件:src属性</p>
-<ul>
-<li>&lt;script src&#x3D;”***.js”/&gt;是无效的HTML，在有的浏览器中无法使用。</li>
-<li>如果不打算使用js扩展名，一定要确保服务器能返回正确的MIME类型。</li>
-<li>使用src属性不应该在标签中再加其他js代码,若加，浏览器只会下载并执行脚本文件，忽略行内代码。</li>
-<li>本质是发送GET请求。</li>
-</ul>
-</li>
-<li><p>动态加载脚本:document.createElement(‘script’)</p>
-<ul>
-<li><p>默认执行方式相当于加了async属性。</p>
-</li>
-<li><p>统一浏览器动态加载行为，element.async&#x3D;false</p>
-</li>
-<li><p>浏览器预加载器不可见，影响资源获取优先级。</p>
-<ul>
-<li>&lt;link ref&#x3D;”preload” href&#x3D;”***.js”&gt;</li>
-</ul>
+<li><p>最佳实践是在控制语句中使用代码块。</p>
 </li>
 </ul>
-</li>
+<h3 id="3-2-关键字与保留字"><a href="#3-2-关键字与保留字" class="headerlink" title="3.2 关键字与保留字"></a>3.2 关键字与保留字</h3><ul>
+<li>关键字和保留字不能用作标识符，一般不用来做属性名。</li>
 </ul>
-</li>
-<li><p>解释特征：</p>
-<ul>
-<li>js代码保存在解释器里。</li>
-<li>js代码被计算完之前，页面其余内容不会被加载，也不会被显示。</li>
-<li>解释顺序：（都立即下载）<ul>
-<li>若无defer、async则依次顺序执行。</li>
-<li>若有defer则延迟到整个页面都解析完后再执行。（即解析到&lt;&#x2F;html&gt;，DOMContentLoaded事件执行之前)</li>
-<li>若有async则异步执行（在页面load事件前执行，可能在DOMContentLoaded之前或之后）。异步js脚本不能在加载期间修改DOM（因为脚本执行的时机不确定，若等到了页面加载完成后执行，需要重新渲染，效率和用户体验都很差。所以，document.write方法不会在async脚本中使用，好的web开发实践一般不使用。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>标签位置：<br> 通常是body元素页面内容后面，即作为body元素内容紧贴&lt;body/&gt;。</p>
-</li>
-<li><p>XHTML</p>
-<ul>
-<li>将HTML作为XML的应用重新包装后的产物。</li>
-<li>XHTML中使用js必须设置”type&#x3D;text&#x2F;javascript”。</li>
-<li>&lt; ——&gt; &amp;lt</li>
-<li><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs xml">//&lt;![CDATA[<br><br>        *任意文本，不作为标签来解析*<br>        <br>//]]&gt;<br><br></code></pre></td></tr></table></figure></li>
-<li></li>
-</ul>
-</li>
+<h3 id="3-3-变量"><a href="#3-3-变量" class="headerlink" title="3.3 变量"></a>3.3 变量</h3><p>变量可以用于保存任何类型的数据。let、const更精确的声明了作用域和语义。最佳实践如下：</p>
+<ol>
+<li>不使用var。</li>
+<li>const优先，let次之。</li>
 </ol>
-<h3 id="2-2-行内代码与外部文件"><a href="#2-2-行内代码与外部文件" class="headerlink" title="2.2 行内代码与外部文件"></a>2.2 行内代码与外部文件</h3><ul>
-<li><p>最佳实践：外部文件</p>
 <ul>
-<li>可维护性，一处更新，多处使用。</li>
-<li>缓存：浏览器会根据特定的设置缓存所有外部链接的js文件。更快。</li>
-<li>适应未来，良好的兼容了HTML和XHTML。<br>  <code>注： SPDY/HTTP2 预请求的消耗已经显著降低？咋么降低的？</code></li>
+<li><p>var</p>
+<ul>
+<li><p>声明作用域</p>
+<ul>
+<li><p>var声明的变量是包含该var声明变量的函数的局部变量,即是函数作用域。</p>
+</li>
+<li><p>省略var操作符会创建一个全局变量，严格模式下会ReferenceError。</p>
+</li>
+</ul>
+</li>
+<li><p>声明提升</p>
+<ul>
+<li>var声明的变量会把“变量声明”自动提升到函数作用域的顶部。</li>
+<li>允许反复多次用var声明变量。</li>
 </ul>
 </li>
 </ul>
-<h3 id="2-3-文档模式"><a href="#2-3-文档模式" class="headerlink" title="2.3 文档模式"></a>2.3 文档模式</h3><ul>
-<li>文档模式一般分为混杂模式和标准模式。通过doctype可以切换。<ul>
-<li>据说浏览器一致性目前是不存在的，要使用黑科技。</li>
-<li>混杂模式省略doctype声明作为开关。</li>
-<li>标准模式有特定的文档类型声明，具体现查吧。</li>
+</li>
+<li><p>let</p>
+<ul>
+<li>let声明的是块作用域。块作用域是函数作用域的子集，适用于var的作用域限制同样也适用于let。</li>
+<li>不允许同一个块作用域出现冗余声明。</li>
+<li>暂时性死区： 在let声明之前执行的瞬间。</li>
+<li>全局声明：  <figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs abnf">var * <span class="hljs-operator">=</span> a<span class="hljs-comment">;</span><br>window.* <span class="hljs-operator">=</span> a<span class="hljs-comment">;</span><br><br>let * <span class="hljs-operator">=</span> b<span class="hljs-comment">;</span><br>页面唯一，*重复声明报SyntaxError。<br></code></pre></td></tr></table></figure></li>
+<li>条件声明：</li>
+</ul>
+<p>  条件声明模式值得是当不确定变量是否已经声明时，假设变量没有声明过。但由于let不能重复声明，所以不能依赖条件生命。</p>
+<ul>
+<li>for循环：</li>
+</ul>
+<p>  let声明很适用于for循环，因为迭代变量的作用域仅限于for循环内部。</p>
+</li>
+<li><p>const</p>
+<ul>
+<li>声明变量时必须同时初始化变量且尝试修改const声明的变量会导致运行错误。</li>
+<li>const声明变量是块作用域。</li>
+<li>const声明的不能修改的限制只适用于他指向的变量的引用，对于对象，可以修改对象内部的属性。</li>
 </ul>
 </li>
 </ul>
-<h3 id="2-4-lt-noscript-gt-元素"><a href="#2-4-lt-noscript-gt-元素" class="headerlink" title="2.4 &lt;noscript&gt;元素"></a>2.4 &lt;noscript&gt;元素</h3><ul>
-<li>用于给不支持js的浏览器提供替换内容。<ul>
-<li>浏览器不支持脚本。</li>
-<li>浏览器对脚本的支持关闭。</li>
+<h3 id="3-4-数据类型"><a href="#3-4-数据类型" class="headerlink" title="3.4 数据类型"></a>3.4 数据类型</h3><p>ECMAScript有6种简单数据类型（原始类型）1种复杂数据类型（对象，无序名值对）。</p>
+<ul>
+<li><p>typeof操作符</p>
+<ul>
+<li>确定任意变量的类型,其中函数严格说来也是一种对象，但是函数有自己特殊的属性，因此有必要通过typeof来区分函数和其他对象。</li>
+</ul>
+</li>
+<li><p>Undefined（typeof——&gt;undefined)</p>
+<ul>
+<li><p>应用场景</p>
+<ul>
+<li>变量声明但未初始化。</li>
+<li>一般不显式的设置undefined，常用于比较。</li>
+</ul>
+</li>
+<li><p>空对象指针和未初始化变量是不同的</p>
+<ul>
+<li>未声明的变量只能进行typeof操作。</li>
+<li>变量未声明和变量未初始化的typeof操作都返回undefined。</li>
+<li>最佳实践式声明的同时进行初始化，对于未确定具体对象值的对象可以初始化为null,这样typeof返回值为undefined就说明是变量尚未声明。</li>
 </ul>
 </li>
 </ul>
-
+</li>
+<li><p>Null(typeof——&gt;Object)</p>
+<ul>
+<li>可用于初始化将来保存对象值的变量。</li>
+<li>undefined是由null派生过来的<br>  <code>https://kb.cnblogs.com/page/77089/</code></li>
+</ul>
+</li>
+<li><p>Boolean(typeof——&gt;boolean)</p>
+<ul>
+<li>有两个字面量：true,false</li>
+<li>所有EMCAScript类型的值都有相应的布尔值的等价形式。</li>
+</ul>
+</li>
+<li><p>Number(typeof——&gt;number)</p>
+<p>  使用IEEE754表示整数和浮点数，不同的数值有不同的数值字面量表示。八进制、十进制、十六进制等。</p>
+<ul>
+<li><p>浮点值</p>
+<ul>
+<li><p>浮点值必须有小数点，且小数点后面必须至少有一个数字。</p>
+</li>
+<li><p>存储浮点值的内存空间是存储整数的两倍。</p>
+</li>
+<li><p>1.0、10.0会被转换成整数。</p>
+</li>
+<li><p>非常大或者非常小的数值用科学计数法来表示。浮点数的最大精确值可以达到17位。</p>
+</li>
+<li><p>由于使用了IEEE754,存在浮点数的舍入错误，所有永远不要测试某个特定的浮点值。</p>
+</li>
+</ul>
+</li>
+<li><p>值的范围</p>
+<p>  内存限制：ECMAScript无法表示所有的数值。</p>
+<ul>
+<li>最小值：Number.MIN_VALUE;</li>
+<li>最大值：Number.MAX_VALUE;</li>
+<li>任何无法表示的负数用-Infinity表示;</li>
+<li>任何无法表示的整数用Infinity表示;</li>
+<li>确定数值是否是可表示的优先数值用isFinite()判断;</li>
+<li>Number.NEGATIVE_INFINITY——&gt;-Infinity;</li>
+<li>Number.POSITIVE_INFINITY——&gt;Infinity;</li>
+</ul>
+</li>
+<li><p>NaN</p>
+<p>  用于替代“抛出错误”表示“返回数值的操作失败了”;可以用来区分错误和NaN。其他语言用0除任意数值都会导致错误，ECMAScript中会返回NaN。</p>
+<ul>
+<li>任何涉及NaN的操作始终返回NaN。</li>
+<li>NaN不等于包括NaN在内的任何值（NaN&#x3D;&#x3D;NaN?false)。</li>
+<li>isNaN()函数判断一个参数是否“不是数值”。任何不能转换位数值的值都会导致这个函数位true.<ul>
+<li>对于对象valueOf()——&gt;toString()——&gt;isNaN();</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>数值转换</p>
+<ul>
+<li><p>Number()</p>
+<p>  可用于任何数据类型。</p>
+<ul>
+<li><p>布尔值：true——&gt;1;false——&gt;0;</p>
+</li>
+<li><p>数值：直接返回;</p>
+</li>
+<li><p>null：0;</p>
+</li>
+<li><p>undefined：返回NaN;</p>
+</li>
+<li><p>字符串：</p>
+<ul>
+<li>“1”——&gt;1 “011”——&gt;11;</li>
+<li>“1.1”——&gt;1.1 “01.1”——&gt;1.1;</li>
+<li>“0xa”——&gt;10;</li>
+<li>“”——&gt;0;</li>
+<li>其他返回NaN;</li>
+</ul>
+</li>
+<li><p>对象</p>
+<ul>
+<li>valueOf()——&gt;toString()</li>
+</ul>
+</li>
+<li><p>其他返回NaN;</p>
+</li>
+</ul>
+</li>
+<li><p>parseInt()</p>
+<p>  主要用于将字符串转换为数值。从第一个非空字符开始转换，如果第一个字符不是数值字符、加号、减号，parseInt立即返回NaN;碰到非数值字符后舍掉后面字符。</p>
+<ul>
+<li>“”——&gt;NaN;</li>
+<li>“1234blue”——&gt;1234;</li>
+<li>22.5——&gt;22;</li>
+<li>0xf——&gt;15;</li>
+<li>parseInt(参数, 进制数值);&#x2F;&#x2F;默认十进制</li>
+</ul>
+</li>
+<li><p>parseFloat()</p>
+<p>  主要用于将字符串转换为数值。从位置0检测到每个字符，解析到字符串末尾或者解析到一个无效的浮点数值字符为止。</p>
+<ul>
+<li>只解析十进制，十六进制返回0；</li>
+<li>始终忽略字符串开头的零；</li>
+<li>“22.5”——&gt;22.5;</li>
+<li>“22.34.5”——&gt;22.35;</li>
+<li>“0xa”——&gt;0;</li>
+<li>“0908.5”——&gt;908.5;</li>
+<li>“3.125e7”——&gt;31250000;</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>String(typeof——&gt;string)</p>
+<p>  表示零或多个16位Unicode字符序列。单引号（’）、双引号（”)、反引号（&#96;)都可以表示。</p>
+<ul>
+<li><p>字符字面量</p>
+<p>  ‘\n’——&gt;换行</p>
+<p>  ‘\b’——&gt;退格</p>
+<p>  ‘\r’——&gt;回车</p>
+<p>  ‘\f’——&gt;换页</p>
+<p>  ‘\xnn’——&gt;以十六进制编码nn表示的字符</p>
+<p>  ‘\unnnn’——&gt;以十六进制编码nnnn表示的unicode字符</p>
+<p>  <code>注：转义序列表示一个字符 </code></p>
+</li>
+<li><p>字符串的特点</p>
+<ul>
+<li>字符串一旦被创建就不能变了。（注意不能改变的是字符串而不是变量中的字符串）</li>
+<li>修改变量中的字符串，必须销毁原始的字符串值，然后将包含新值的另一个字符串保存到该变量。</li>
+</ul>
+</li>
+<li><p>转换为字符串</p>
+<ul>
+<li><p>toString()</p>
+<ul>
+<li>返回当前值（数值、字符串、布尔值、对象不包括null和undefined）的字符串的等价物。</li>
+<li>数值的toString()方法可以根据参数的数值输出对应的进制的数值。</li>
+<li>found.toString()。</li>
+</ul>
+</li>
+<li><p>String()</p>
+<ul>
+<li><p>返回相应类型值的字符串。</p>
+<ul>
+<li>如果值有toString()方法则调用该方法并返回结果。</li>
+<li>如果值是null,返回null。</li>
+<li>如果值是undefined,返回undefined。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>模板字面量</p>
+<ul>
+<li>模板字面量用&#96;&#96;来定义。</li>
+<li>模板字面量会保留反引号内部的换行字符。</li>
+<li>模板字面量会保留反引号内部的空格。</li>
+<li>技术上讲，模板字面量不是字符串而是一种特殊的JS句法表达式，求值后的结果是字符串。</li>
+</ul>
+</li>
+<li><p>字符串插值</p>
+<ul>
+<li>实现方式：${}中使用一个JS表达式实现。</li>
+</ul>
+</li>
+<li><p>模板字面量标签函数</p>
+<ul>
+<li>标签函数：<ul>
+<li><p>参数是被插值记号分割后的模板和对每个表达式求值的结果。</p>
+<p>  <code>function // simpleTag(</code>${a}+${b}&#x3D;${c}<code>)</code></p>
+</li>
+<li><p>对于有n个插值的模板字面量，标签函数的表达式参数始终是n个，原始字符串数组包含的字符串个数为n+1;</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>原始字符串</p>
+<ul>
+<li>String.raw`\n`——&gt;\n</li>
+<li>String.raw可以将模板字面量直接转换为Unicode字符。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Symbol(typeof——&gt;symbol)</p>
+<p>  确保对象属性使用的唯一标识符，不会发生属性冲突。</p>
+<p>  符号实例是唯一的、不可变的。</p>
+<ul>
+<li><p>基本用法</p>
+<ul>
+<li>符号本身是原始数据类型。</li>
+<li>let sym &#x3D; Symbol();<ul>
+<li>字符串参数作为符号的描述;</li>
+<li>字符串参数于符号定义或者标识完全无关；</li>
+</ul>
+</li>
+<li>typeof(sym) &#x2F;&#x2F;symbol</li>
+<li>只要创建Symbol实例并将其用作对象的属性，就可以保证它不会覆盖已有的对象属性；</li>
+<li>Symbol()不能和new关键字一起作为构造函数使用。<ul>
+<li>符号包装对象<ul>
+<li>Object(Symbol())</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>全局符号注册表</p>
+<ul>
+<li><p>共享和重用符号实例</p>
+<p>  <code>幂等：f(f(x)) = f(x)</code></p>
+<p>  <code>字符串键、符号</code></p>
+<p>  Symbol.for()对每个字符串键执行幂等操作。将任意类型的参数转换为字符串值。维护并检查全局运行时注册表。</p>
+<p>  全局注册表中的符号必须使用字符串键来解决。</p>
+<p>  Symbol.keyFor()来查询全局注册表，这个方法接收符号，返回该全局顾好对应的字符串键。</p>
+<p>  <code>Symbol.for():全局符号</code></p>
+<p>  <code>Symbol():普通符号</code></p>
+</li>
+</ul>
+</li>
+<li><p>符号作为属性</p>
+</li>
+<li><p>常用内置符号</p>
+</li>
+<li><p>Symbol.asyncIterator</p>
+</li>
+<li><p>Symbol.isConcatSpreadable</p>
+</li>
+<li><p>Symbol.iterator</p>
+</li>
+<li><p>Symbol.match</p>
+</li>
+<li><p>Symbol.replace</p>
+</li>
+<li><p>Symbol.search</p>
+</li>
+<li><p>Symbol.species</p>
+</li>
+<li><p>Symbol.split</p>
+</li>
+<li><p>Symbol.toPrimitive</p>
+</li>
+<li><p>Symbol.toStringTag</p>
+</li>
+<li><p>Symbol.unscopables</p>
+</li>
+</ul>
+</li>
+<li><p>Object(typeof——&gt;object)</p>
+</li>
+</ul>
+<h3 id="3-5-操作符"><a href="#3-5-操作符" class="headerlink" title="3.5 操作符"></a>3.5 操作符</h3><h3 id="3-6-语句"><a href="#3-6-语句" class="headerlink" title="3.6 语句"></a>3.6 语句</h3><h3 id="3-7-函数"><a href="#3-7-函数" class="headerlink" title="3.7 函数"></a>3.7 函数</h3><h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3>
                 
               </div>
             
@@ -451,8 +688,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>第二章 HTML中的JavaScript</div>
-      <div>https://flower-biubiu.github.io/2022/07/26/第二章/</div>
+      <div>第三章 语言基础</div>
+      <div>https://flower-biubiu.github.io/2022/07/26/第三章/</div>
     </div>
     <div class="license-meta">
       
@@ -494,9 +731,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/08/01/%E7%AC%AC%E5%9B%9B%E7%AB%A0/" title="第四章 变量、作用域与内存">
+                      <a href="/2022/07/26/%E7%AC%AC%E4%BA%8C%E7%AB%A0/" title="第二章 HTML中的JavaScript">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">第四章 变量、作用域与内存</span>
+                        <span class="hidden-mobile">第二章 HTML中的JavaScript</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -504,8 +741,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/07/26/%E7%AC%AC%E4%B8%89%E7%AB%A0/" title="第三章 语言基础">
-                        <span class="hidden-mobile">第三章 语言基础</span>
+                      <a href="/2022/07/26/%E8%AE%A4%E7%9F%A5%E9%A9%B1%E5%8A%A8/" title="认知驱动">
+                        <span class="hidden-mobile">认知驱动</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
