@@ -4,11 +4,78 @@
   
   
   <entry>
+    <title>CSS属性</title>
+    <link href="/2022/10/09/CSS%E5%B1%9E%E6%80%A7/"/>
+    <url>/2022/10/09/CSS%E5%B1%9E%E6%80%A7/</url>
+    
+    <content type="html"><![CDATA[]]></content>
+    
+    
+    <categories>
+      
+      <category>Study</category>
+      
+      <category>CSS</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>学前准备</title>
+    <link href="/2022/09/18/%E5%AD%A6%E5%89%8D%E5%87%86%E5%A4%87/"/>
+    <url>/2022/09/18/%E5%AD%A6%E5%89%8D%E5%87%86%E5%A4%87/</url>
+    
+    <content type="html"><![CDATA[]]></content>
+    
+    
+    <categories>
+      
+      <category>Book</category>
+      
+      <category>Technology</category>
+      
+      <category>玩转CSS之美</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>第一章</title>
+    <link href="/2022/08/29/%E7%AC%AC%E4%B8%80%E7%AB%A0-1/"/>
+    <url>/2022/08/29/%E7%AC%AC%E4%B8%80%E7%AB%A0-1/</url>
+    
+    <content type="html"><![CDATA[]]></content>
+    
+    
+    <categories>
+      
+      <category>Book</category>
+      
+      <category>Technology</category>
+      
+      <category>深入浅出Vue.js</category>
+      
+    </categories>
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>第四章 变量、作用域与内存</title>
     <link href="/2022/08/01/%E7%AC%AC%E5%9B%9B%E7%AB%A0/"/>
     <url>/2022/08/01/%E7%AC%AC%E5%9B%9B%E7%AB%A0/</url>
     
-    <content type="html"><![CDATA[<h2 id="笔记"><a href="#笔记" class="headerlink" title="笔记"></a>笔记</h2><h3 id="3-1-语法"><a href="#3-1-语法" class="headerlink" title="3.1 语法"></a>3.1 语法</h3><h3 id="3-2-关键字与保留字"><a href="#3-2-关键字与保留字" class="headerlink" title="3.2 关键字与保留字"></a>3.2 关键字与保留字</h3><h3 id="3-3-变量"><a href="#3-3-变量" class="headerlink" title="3.3 变量"></a>3.3 变量</h3><h3 id="3-4-数据类型"><a href="#3-4-数据类型" class="headerlink" title="3.4 数据类型"></a>3.4 数据类型</h3><h3 id="3-5-操作符"><a href="#3-5-操作符" class="headerlink" title="3.5 操作符"></a>3.5 操作符</h3><h3 id="3-6-语句"><a href="#3-6-语句" class="headerlink" title="3.6 语句"></a>3.6 语句</h3><h3 id="3-7-函数"><a href="#3-7-函数" class="headerlink" title="3.7 函数"></a>3.7 函数</h3><h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3>]]></content>
+    <content type="html"><![CDATA[<h2 id="笔记"><a href="#笔记" class="headerlink" title="笔记"></a>笔记</h2><p>JavaScript变量是松散的，变量的值和数据类型咋脚本生命期内可以改变。</p><h3 id="4-1-原始值与引用值"><a href="#4-1-原始值与引用值" class="headerlink" title="4.1 原始值与引用值"></a>4.1 原始值与引用值</h3><p>原始值：最简单的数据；原始值是按值访问的，我们操作的就是存储在变量中的实际值；</p><p>引用值：多个值构成的对象；引用值是保存在内存中的对象，JS不允许直接访问内存位置；操作对象时实际操作的时该对象的引用，保存引用的变量是按引用访问的。</p><p>JS引擎必须确定这个值是原始值还是引用值</p><ul><li><p>动态属性</p><p>  引用值可以动态的添加后面可以使用的属性，原始值不可以；</p></li><li><p>复制值</p></li><li><p>传递参数</p></li><li><p>确定类型</p></li></ul><h3 id="4-2-执行上下问与作用域"><a href="#4-2-执行上下问与作用域" class="headerlink" title="4.2 执行上下问与作用域"></a>4.2 执行上下问与作用域</h3><h3 id="4-3-垃圾回收"><a href="#4-3-垃圾回收" class="headerlink" title="4.3 垃圾回收"></a>4.3 垃圾回收</h3><h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3>]]></content>
     
     
     <categories>
@@ -178,8 +245,6 @@
       
       <category>Computer Network</category>
       
-      <category>计算机网络</category>
-      
     </categories>
     
     
@@ -201,8 +266,6 @@
       
       <category>Operating System</category>
       
-      <category>操作系统</category>
-      
     </categories>
     
     
@@ -223,8 +286,6 @@
       <category>Study</category>
       
       <category>Data Structure</category>
-      
-      <category>数据结构</category>
       
     </categories>
     
