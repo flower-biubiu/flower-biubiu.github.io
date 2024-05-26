@@ -1,0 +1,18 @@
+.flex-wrap-container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    background-color: antiquewhite;
+}
+.justify-space-between {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    background-color: antiquewhite;
+}
+.flex-item {
+    margin: 10px;
+    width: 200px;
+    height: 200px;
+    background-color: red;
+}

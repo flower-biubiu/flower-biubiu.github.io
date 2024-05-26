@@ -1,0 +1,898 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Ciel Liu">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="1 开篇知识点 首屏的显示就涉及了DNS、HTTP、DOM解析、CSS阻塞、JavaScript阻塞等技术因素，其中一项没处理好就可能导致整个页面的延时。  Node.js是前端发展的一个核心推动力  浏览器发展的主要动力可能来自于用户需求，以及安全、性能问题的日益凸显，但它可以从多线程进展到多进程是建立在硬件能力提升的基础打上的；而计算机硬件能力的提升，使得计算机使用范围扩大，从而催生了用户更多">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浏览器工作原理学习笔记">
+<meta property="og:url" content="https://flower-biubiu.github.io/2023/05/10/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="小刘的博客">
+<meta property="og:description" content="1 开篇知识点 首屏的显示就涉及了DNS、HTTP、DOM解析、CSS阻塞、JavaScript阻塞等技术因素，其中一项没处理好就可能导致整个页面的延时。  Node.js是前端发展的一个核心推动力  浏览器发展的主要动力可能来自于用户需求，以及安全、性能问题的日益凸显，但它可以从多线程进展到多进程是建立在硬件能力提升的基础打上的；而计算机硬件能力的提升，使得计算机使用范围扩大，从而催生了用户更多">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://flower-biubiu.github.io/images/promise.png">
+<meta property="article:published_time" content="2023-05-10T06:09:02.000Z">
+<meta property="article:modified_time" content="2024-05-17T12:24:56.900Z">
+<meta property="article:author" content="Ciel Liu">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://flower-biubiu.github.io/images/promise.png">
+  
+  
+  
+  <title>浏览器工作原理学习笔记 - 小刘的博客</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"flower-biubiu.github.io","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":"2MyReCCzhre867r9v8LB4R4h-gzGzoHsz","app_key":"zyRiQvYztJHwm5p4jBnxs1Ja","server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Ciel&#39;s Blog</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                Tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/html/test.html">
+                <i class="iconfont icon-user-fill"></i>
+                test
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="浏览器工作原理学习笔记"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-05-10 14:09" pubdate>
+          May 10, 2023 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          6.4k words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          54 mins
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span> views
+        </span>
+        
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">浏览器工作原理学习笔记</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="1-开篇知识点"><a href="#1-开篇知识点" class="headerlink" title="1 开篇知识点"></a>1 开篇知识点</h2><ul>
+<li><p>首屏的显示就涉及了DNS、HTTP、DOM解析、CSS阻塞、JavaScript阻塞等技术因素，其中一项没处理好就可能导致整个页面的延时。</p>
+</li>
+<li><p>Node.js是前端发展的一个核心推动力</p>
+</li>
+<li><p>浏览器发展的主要动力可能来自于用户需求，以及安全、性能问题的日益凸显，但它可以从多线程进展到多进程是建立在硬件能力提升的基础打上的；而计算机硬件能力的提升，使得计算机使用范围扩大，从而催生了用户更多的需求，以及对安全、性能的更高要求。所以一切看起来似乎是工业发展的必然结果。</p>
+</li>
+<li><p>DNS缓存和页面资源缓存这两块数据是会被浏览器缓存的。</p>
+</li>
+<li><p>DOM和HTML内容几乎是一样的，但是和HTML不同的是，DOM是保存在内存中树状结构，可以通过JavaScript来查询或修改其内容。</p>
+</li>
+<li><p>按照渲染的时间顺序，流水线可分为如下几个子阶段：构建DOM树、样式计算、布局阶段、分层、绘制、分块、光栅化和合成。</p>
+<p>  <a target="_blank" rel="noopener" href="https://juejin.cn/post/7094207568926474254">https://juejin.cn/post/7094207568926474254</a></p>
+</li>
+<li><p>问：如果下载CSS文件阻塞了，会阻塞DOM树的合成吗？会阻塞页面的显示吗？</p>
+<p>  答：不会阻塞DOM树的合成，但会阻塞页面的显示。</p>
+<p>  官方回答：</p>
+<ul>
+<li><p>css加载不会阻塞DOM树的解析</p>
+</li>
+<li><p>css加载会阻塞DOM树的渲染</p>
+</li>
+<li><p>css加载会阻塞后面js语句的执行</p>
+</li>
+</ul>
+<p>  参考网址：<a target="_blank" rel="noopener" href="https://juejin.cn/post/6844903667733118983">https://juejin.cn/post/6844903667733118983</a></p>
+</li>
+</ul>
+<h2 id="2-调用栈"><a href="#2-调用栈" class="headerlink" title="2 调用栈"></a>2 调用栈</h2><ul>
+<li>调用栈是用来管理函数调用关系的一种数据结构。</li>
+<li>调用栈有大小。</li>
+</ul>
+<h2 id="3-作用域"><a href="#3-作用域" class="headerlink" title="3 作用域"></a>3 作用域</h2><ul>
+<li><p>作用域指的是变量和函数的可访问范围。</p>
+</li>
+<li><p>var声明的变量存在变量提升变量提升带来的问题：</p>
+<ol>
+<li>变量容易被反直觉覆盖。</li>
+<li>直觉上应该销毁的变量没有销毁。  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> myname = <span class="hljs-string">&quot;柯基笨笨&quot;</span><br><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">showName</span>(<span class="hljs-params"></span>)&#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(myname);<br>    <span class="hljs-keyword">if</span>(<span class="hljs-number">0</span>)&#123;<br>        <span class="hljs-keyword">var</span> myname = <span class="hljs-string">&quot;柯基聪聪&quot;</span><br>    &#125;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(myname);<br>    &#125;<br><span class="hljs-title function_">showName</span>()<br><br><span class="hljs-literal">undefined</span><br><span class="hljs-literal">undefined</span><br></code></pre></td></tr></table></figure>
+  <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">var</span> myname = <span class="hljs-string">&quot;柯基笨笨&quot;</span><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">showName</span>(<span class="hljs-params"></span>)&#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(myname);<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(myname);<br>&#125;<br><span class="hljs-title function_">showName</span>()<br><br>柯基笨笨<br>柯基笨笨<br></code></pre></td></tr></table></figure></li>
+</ol>
+</li>
+<li><p>变量提升问题的解决方法：块级作用域（let、const) 。</p>
+<ul>
+<li>var声明的变量放到变量环境中；</li>
+<li>let声明的变量放到词法环境中；</li>
+<li>函数作用域块内部，let声明的变量不放到词法环境中。</li>
+</ul>
+</li>
+<li><p>块级作用域是通过 <strong>词法环境的栈结构</strong> 来实现的；变量提升是通过 <strong>变量环境</strong> 实现的；</p>
+</li>
+</ul>
+<h2 id="4-作用域链"><a href="#4-作用域链" class="headerlink" title="4 作用域链"></a>4 作用域链</h2><ul>
+<li>作用域链是代码运行过程中查找引用变量的路线。</li>
+<li>js执行过程中的作用域链是由词法作用域决定的。</li>
+<li>闭包<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// 闭包（外部函数执行结束，内部函数引用外部函数的变量依然保存在内存中，这些变量的集合称为闭包）</span><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">foo</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-keyword">var</span> myName = <span class="hljs-string">&quot;柯基笨笨&quot;</span><br>    <span class="hljs-keyword">let</span> test1 = <span class="hljs-number">1</span><br>    <span class="hljs-keyword">const</span> test2 = <span class="hljs-number">2</span><br>    <span class="hljs-keyword">var</span> innerBar = &#123;<br>        <span class="hljs-attr">getName</span>:<span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)&#123;<br>            <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(test1)<br>            <span class="hljs-keyword">return</span> myName<br>        &#125;,<br>        <span class="hljs-attr">setName</span>:<span class="hljs-keyword">function</span>(<span class="hljs-params">newName</span>)&#123;<br>            myName = newName<br>        &#125;<br>    &#125;<br>    <span class="hljs-keyword">return</span> innerBar<br>&#125;<br><span class="hljs-keyword">var</span> bar = <span class="hljs-title function_">foo</span>()<br>bar.<span class="hljs-title function_">setName</span>(<span class="hljs-string">&quot;柯基聪聪&quot;</span>)<br>bar.<span class="hljs-title function_">getName</span>()<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(bar.<span class="hljs-title function_">getName</span>())<br></code></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// 没有形成闭包</span><br><span class="hljs-keyword">var</span> bar = &#123;<br>    <span class="hljs-attr">myName</span>:<span class="hljs-string">&quot;time.geekbang.com&quot;</span>,<br>    <span class="hljs-attr">printName</span>: <span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(myName)<br>    &#125;    <br>&#125;<br><span class="hljs-keyword">function</span> <span class="hljs-title function_">foo</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-keyword">let</span> myName = <span class="hljs-string">&quot;柯基笨笨&quot;</span><br>    <span class="hljs-keyword">return</span> bar.<span class="hljs-property">printName</span><br>&#125;<br><span class="hljs-keyword">let</span> myName = <span class="hljs-string">&quot;柯基聪聪&quot;</span><br><span class="hljs-keyword">let</span> _printName = <span class="hljs-title function_">foo</span>()<br><span class="hljs-title function_">_printName</span>()<br>bar.<span class="hljs-title function_">printName</span>()<br><br>柯基聪聪<br>柯基聪聪<br></code></pre></td></tr></table></figure></li>
+<li>产生闭包的核心有两步：第一步是需要预扫描内部函数；第二步是把内部函数引用的外部变量保存到堆中。</li>
+</ul>
+<h2 id="5-变量提升"><a href="#5-变量提升" class="headerlink" title="5 变量提升"></a>5 变量提升</h2><h3 id="5-1-结论"><a href="#5-1-结论" class="headerlink" title="5.1 结论"></a>5.1 结论</h3><ul>
+<li>若执行过程中遇到未声明的变量，则报错。</li>
+<li>若执行过程中遇到下文定义的变量，该值为undefined，不是定义时的值。</li>
+<li>若执行过程中遇到下文定义的函数，则函数正确执行。</li>
+</ul>
+<h3 id="5-2-原理"><a href="#5-2-原理" class="headerlink" title="5.2 原理"></a>5.2 原理</h3><ul>
+<li>js数据类型</li>
+<li>js执行机制：先编译，再执行。</li>
+<li>js代码编译后，会生成两部分：执行上下文和可执行代码。</li>
+<li>执行上下文：js代码的运行环境，该代码执行过程中的this、变量、对象以及函数等。</li>
+<li>执行上下文中存在一个变量环境的对象，保存了变量环境的内容。</li>
+</ul>
+<h2 id="6-执行上下文"><a href="#6-执行上下文" class="headerlink" title="6 执行上下文"></a>6 执行上下文</h2><ul>
+<li>执行上下文指得是js代码运行时的环境。</li>
+<li>执行上下文分为全局执行上下文和函数执行上下文。</li>
+</ul>
+<h2 id="7-回调地狱"><a href="#7-回调地狱" class="headerlink" title="7 回调地狱"></a>7 回调地狱</h2><ul>
+<li>回调函数嵌套回调函数。</li>
+<li>参考链接：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_42698326/article/details/111075519">https://blog.csdn.net/qq_42698326/article/details/111075519</a></li>
+</ul>
+<h2 id="8-定时器、Promise和async-x2F-await"><a href="#8-定时器、Promise和async-x2F-await" class="headerlink" title="8 定时器、Promise和async&#x2F;await"></a>8 定时器、Promise和async&#x2F;await</h2><p>下面这段代码整合了定时器、Promise 和 async &#x2F; await ，你能分析出来这段代码执行后输出的内容吗？</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">foo</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;foo&#x27;</span>)<br>&#125;<br><span class="hljs-keyword">async</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">bar</span>(<span class="hljs-params"></span>) &#123;<br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;bar start&#x27;</span>)<br>    <span class="hljs-comment">// 这里</span><br>    <span class="hljs-keyword">await</span> <span class="hljs-title function_">foo</span>()    <br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;bar end&#x27;</span>)<br>&#125;<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;script start&#x27;</span>)<br><span class="hljs-built_in">setTimeout</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;<br>		<span class="hljs-comment">// 这里</span><br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;setTimeout&#x27;</span>)<br>&#125;, <span class="hljs-number">0</span>)<br><span class="hljs-title function_">bar</span>();<br><span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params">resolve</span>) &#123;<br>		<span class="hljs-comment">// 这里</span><br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;promise executor&#x27;</span>)<br>    <span class="hljs-title function_">resolve</span>();<br>&#125;).<span class="hljs-title function_">then</span>(<span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) &#123;<br>		<span class="hljs-comment">// 这里</span><br>    <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;promise then&#x27;</span>)<br>&#125;)<br><span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">&#x27;script end&#x27;</span>)<br></code></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// 答案</span><br>script start  <span class="hljs-comment">// 主线程</span><br>bar start  <span class="hljs-comment">// 主线程到协程 协程</span><br>foo  <span class="hljs-comment">// 协程 协程到主线程</span><br>promise executor <span class="hljs-comment">// 主线程</span><br>script end  <span class="hljs-comment">// 主线程</span><br>bar end <span class="hljs-comment">// 微任务 主线程到协程 协程</span><br>promise then   <span class="hljs-comment">// 微任务 主线程到协程 协程 // promise then  和 bar end 输出还存在问题  不同环境下，这两个输出的顺序不同。</span><br>settimeout <span class="hljs-comment">// 延迟队列</span><br></code></pre></td></tr></table></figure>
+<p><img src="/../images/promise.png" srcset="/img/loading.gif" lazyload></p>
+<h3 id="8-1-相关知识点"><a href="#8-1-相关知识点" class="headerlink" title="8.1 相关知识点"></a>8.1 相关知识点</h3><ul>
+<li><p>浏览器页面是由消息队列和事件循环来驱动的</p>
+</li>
+<li><p>定时器回调任务添加到延迟队列中</p>
+</li>
+<li><p>进程、线程、协程（比线程更小</p>
+</li>
+<li><p>async：异步执行和隐式返回<br>  await：背后是Promise和生成器（微任务和协程）；</p>
+<p>  作用：暂停当前协程，并返回给父协程一个promise；等待父协程执行微任务中的回调，暂停父协程继续执行await所在的协程；</p>
+</li>
+</ul>
+<h3 id="8-2-思考与总结"><a href="#8-2-思考与总结" class="headerlink" title="8.2 思考与总结"></a>8.2 思考与总结</h3><p>问：为什么要有promise？</p>
+<p>答：为了解决“回调地狱”</p>
+<p>问：promise如何解决的回调地狱问题？</p>
+<p>答：针对嵌套调用promise采用了延迟绑定回调（用微任务的方法延迟回调；        针对任务的不确定性采用将返回值穿透到外层；        将错误处理合并成一个；</p>
+<p>问：Promise中为什么要引入微任务？</p>
+<p>答：为了实现延迟绑定回调。</p>
+<p>问：Promise中是如何实现回调函数返回值穿透的？</p>
+<p>答：通过调用promise.then 返回一个promise（bridge promise）,并在新promise的内部将成功时执行的回调函数放到队列，调用onresolve,onresolve 返回执行结果。resolve接受执行结果作为参数，方便后续调用。</p>
+<p>问：Promise出错后，是怎么通过“冒泡”传递给最后那个捕获异常的函数？</p>
+<p>答：这就要问问reject了</p>
+<h3 id="8-3-Promise的运行过程"><a href="#8-3-Promise的运行过程" class="headerlink" title="8.3 Promise的运行过程"></a>8.3 Promise的运行过程</h3><ul>
+<li>demo &#x3D; new Promise(executor)</li>
+<li>executor-&gt;resolve</li>
+<li>resolve-&gt;demo.then</li>
+<li>demo.then-&gt;onResolve<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">Bromise</span>(<span class="hljs-params">executor</span>) &#123;<br>    <span class="hljs-keyword">var</span> onResolve_ = <span class="hljs-literal">null</span><br>    <span class="hljs-keyword">var</span> onReject_ = <span class="hljs-literal">null</span><br>     <span class="hljs-comment">//模拟实现resolve和then，暂不支持rejcet</span><br>    <span class="hljs-variable language_">this</span>.<span class="hljs-property">then</span> = <span class="hljs-keyword">function</span> (<span class="hljs-params">onResolve, onReject</span>) &#123;<br>        onResolve_ = onResolve<br>    &#125;;<br>    <span class="hljs-keyword">function</span> <span class="hljs-title function_">resolve</span>(<span class="hljs-params">value</span>) &#123;<br>          <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">()=&gt;</span>&#123;<br>            <span class="hljs-title function_">onResolve_</span>(value)<br>           &#125;,<span class="hljs-number">0</span>)<br>    &#125;<br>    <span class="hljs-title function_">executor</span>(resolve, <span class="hljs-literal">null</span>);<br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="8-4-Promise构造函数"><a href="#8-4-Promise构造函数" class="headerlink" title="8.4 Promise构造函数"></a>8.4 Promise构造函数</h3><p>new Promise (executor)</p>
+<ul>
+<li>executor: 将一段处理函数产生的结果绑定在Promise上，方便后续传递</li>
+<li>executor: 异步</li>
+<li>executor: 提供回调</li>
+<li>executor: 回调通过调用resolve终止回调</li>
+<li>executor:<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript">(resolve, reject) =&gt; &#123;<br>    <span class="hljs-title function_">resolve</span>(value)<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve, reject</span>) =&gt;</span> &#123;<br>    <span class="hljs-title function_">resolve</span>(value)<br>&#125;)<br></code></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Promise</span>(<span class="hljs-function">(<span class="hljs-params">resolve, reject</span>) =&gt;</span> &#123;<br>    <span class="hljs-title function_">resolve</span>(value)<br>&#125;)<br></code></pre></td></tr></table></figure></li>
+<li>resolve:被调用结束回调</li>
+<li>resolve:包含一个参数（可以赋值为异步处理结果）参数被返回给绑定的promise上</li>
+</ul>
+<h2 id="9-防抖和节流"><a href="#9-防抖和节流" class="headerlink" title="9 防抖和节流"></a>9 防抖和节流</h2><h3 id="9-1-防抖（debounce"><a href="#9-1-防抖（debounce" class="headerlink" title="9.1 防抖（debounce)"></a>9.1 防抖（debounce)</h3><ul>
+<li>类比：乘电梯</li>
+<li>特点：执行时间间隔不固定</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// 封装</span><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">debounce</span>(<span class="hljs-params">fn, wait, immediate = <span class="hljs-literal">false</span>, max = <span class="hljs-number">10</span></span>) &#123;<br>    <span class="hljs-keyword">let</span> timer = <span class="hljs-literal">null</span><br>    <span class="hljs-keyword">let</span> timeStart = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>().<span class="hljs-title function_">getTime</span>()<br>    <span class="hljs-keyword">let</span> times = <span class="hljs-number">0</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">function</span>(<span class="hljs-params">...args</span>) &#123;<br>        <span class="hljs-keyword">if</span> (immediate &amp;&amp; !timer) &#123;<br>            timer = <span class="hljs-built_in">setTimeout</span>(fn.<span class="hljs-title function_">bind</span>(<span class="hljs-variable language_">this</span>), <span class="hljs-number">0</span>, ...args)<br>        &#125; <span class="hljs-keyword">else</span> &#123;<br>            <span class="hljs-built_in">clearTimeout</span>(timer)<br>            timer = <span class="hljs-built_in">setTimeout</span>(fn.<span class="hljs-title function_">bind</span>(<span class="hljs-variable language_">this</span>), wait, ...args)<br>        &#125;<br>        times++<br>        <span class="hljs-keyword">let</span> now = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>().<span class="hljs-title function_">getTime</span>()<br><br>        <span class="hljs-keyword">if</span> (times &gt;= max) &#123;<br>            times = <span class="hljs-number">0</span><br>        &#125;<br>        <span class="hljs-keyword">if</span> (now &gt;= timeStart + wait) &#123;<br>            times = <span class="hljs-number">0</span><br>            timeStart = now<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// 立即执行</span><br><span class="hljs-keyword">const</span> <span class="hljs-title function_">debounce</span> = (<span class="hljs-params">func, wait, ...args</span>) =&gt; &#123;<br>  <span class="hljs-keyword">let</span> timeout;   <span class="hljs-comment">// 首次进入的timeout应该是false</span><br>  <span class="hljs-keyword">return</span> <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)&#123;<br>    <span class="hljs-keyword">const</span> context = <span class="hljs-variable language_">this</span>;<br>    <span class="hljs-keyword">if</span> (timeout) <span class="hljs-title function_">cleatTimeout</span>(timeout);<br>    <span class="hljs-keyword">let</span> callNow = !timeout;  <span class="hljs-comment">// 首次进入的callNow会为!false也就是true，所以会上来执行方法</span><br>    timeout = <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>      timeout = <span class="hljs-literal">null</span>;<br>    &#125;,wait)<br>    <br>    <span class="hljs-keyword">if</span>(callNow) func.<span class="hljs-title function_">apply</span>(context,args)<br>   &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// 非立即执行</span><br><span class="hljs-keyword">const</span> <span class="hljs-title function_">debounce</span> = (<span class="hljs-params">func, wait, ...args</span>) =&gt; &#123;<br>  <span class="hljs-keyword">let</span> timeout;<br>  <span class="hljs-keyword">return</span> <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)&#123;<br>    <span class="hljs-keyword">const</span> context = <span class="hljs-variable language_">this</span>;<br>    <span class="hljs-keyword">if</span> (timeout) <span class="hljs-built_in">clearTimeout</span>(timeout); <span class="hljs-comment">// 如果在已经触发过一次函数的时候再次触发，那么timeout就会为true，也就会将定时器清空，从头再来～</span><br>    timeout = <span class="hljs-built_in">setTimeout</span>(<span class="hljs-function">() =&gt;</span> &#123;<br>      func.<span class="hljs-title function_">apply</span>(context, args)<br>    &#125;,wait);<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h3 id="9-2-节流（throttle）"><a href="#9-2-节流（throttle）" class="headerlink" title="9.2 节流（throttle）"></a>9.2 节流（throttle）</h3><ul>
+<li>类比：游戏放大招</li>
+<li>特点：时间间隔固定</li>
+<li>核心：时间戳大于预期<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs javascript"><span class="hljs-comment">// 封装</span><br><span class="hljs-keyword">function</span> <span class="hljs-title function_">throttle</span>(<span class="hljs-params">func, wait</span>) &#123;<br>    <span class="hljs-keyword">let</span> pre = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>()<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) &#123;<br>        <span class="hljs-keyword">let</span> cur = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>()<br>        <span class="hljs-keyword">if</span> (cur - pre &gt; wait) <br>        		<span class="hljs-comment">// arguments 是一个类数组对象。代表传给一个function的参数列表。</span><br>            func.<span class="hljs-title function_">apply</span>(<span class="hljs-variable language_">this</span>, <span class="hljs-variable language_">arguments</span>)<br>            pre = <span class="hljs-keyword">new</span> <span class="hljs-title class_">Date</span>()<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="10-链接跳转（原页面跳转or打开新标签页）"><a href="#10-链接跳转（原页面跳转or打开新标签页）" class="headerlink" title="10 链接跳转（原页面跳转or打开新标签页）"></a>10 链接跳转（原页面跳转or打开新标签页）</h2><p>参考链接：<a target="_blank" rel="noopener" href="https://segmentfault.com/a/1190000024475135">https://segmentfault.com/a/1190000024475135</a></p>
+<h2 id="11-this"><a href="#11-this" class="headerlink" title="11 this"></a>11 this</h2><ul>
+<li>全局执行上下文：window</li>
+<li>函数执行上下文<ul>
+<li>默认其中的this也指向window</li>
+<li>设置函数执行上下文中this的方法<ul>
+<li>func.call(obj)</li>
+<li>obj.func()</li>
+<li>new: this指向对象</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>this设计缺陷<ul>
+<li>嵌套函数中的this不能继承外部函数；即 func1.func2中的this指向window<ul>
+<li>嵌套函数中声明self</li>
+<li>箭头函数</li>
+</ul>
+</li>
+<li>在默认情况下调用一个函数，其执行上下文中的this是默认指向全局对象window的<ul>
+<li>在严格模式下，默认执行一个函数，其函数的执行上下文中的this值是undefined，这就解决上面的问题了。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="12-堆栈"><a href="#12-堆栈" class="headerlink" title="12 堆栈"></a>12 堆栈</h2><ul>
+<li>原始类型数据存放在栈中，引用类型的数据存放在堆中。</li>
+<li>JavaScript的变量是没有数据类型的，值才有数据类型。</li>
+</ul>
+<h2 id="13-垃圾回收"><a href="#13-垃圾回收" class="headerlink" title="13 垃圾回收"></a>13 垃圾回收</h2><ul>
+<li>标记——&gt;清理——&gt;整理</li>
+<li>调用栈<ul>
+<li>记录当前执行状态的指针下移</li>
+</ul>
+</li>
+<li>堆空间<ul>
+<li>副垃圾回收器（新生代，Scavenge算法<ul>
+<li>标记——&gt;复制</li>
+<li>对象晋升</li>
+</ul>
+</li>
+<li>主垃圾回收器（老生代</li>
+</ul>
+</li>
+</ul>
+<h2 id="14-编译器与解释器"><a href="#14-编译器与解释器" class="headerlink" title="14 编译器与解释器"></a>14 编译器与解释器</h2><ul>
+<li>js是解释型语言</li>
+<li>v8如何执行js代码</li>
+<li>如何优化js执行效率<ul>
+<li>提升单次脚本的执行速度，避免JavaScript的长任务霸占主线程，这样可以使得页面快速响应交互；</li>
+<li>避免大的内联脚本，因为在解析HTML的过程中，解析和编译也会占用主线程；</li>
+<li>减少JavaScript文件的容量，因为更小的文件会提升下载速度，并且占用更低的内存。</li>
+</ul>
+</li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Study/" class="category-chain-item">Study</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Study/Browser/" class="category-chain-item">Browser</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>浏览器工作原理学习笔记</div>
+      <div>https://flower-biubiu.github.io/2023/05/10/浏览器工作原理学习笔记/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>Ciel Liu</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>May 10, 2023</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>Licensed under</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/05/15/Fuction/" title="Good Fuction">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Good Fuction</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/10/09/CSS%E5%B1%9E%E6%80%A7/" title="CSS属性">
+                        <span class="hidden-mobile">CSS属性</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.4.17/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"2MyReCCzhre867r9v8LB4R4h-gzGzoHsz","appKey":"zyRiQvYztJHwm5p4jBnxs1Ja","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;Table of Contents</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量 
+        <span id="leancloud-site-pv"></span>
+         次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访问数 
+        <span id="leancloud-site-uv"></span>
+         人
+      </span>
+    
+    
+
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
